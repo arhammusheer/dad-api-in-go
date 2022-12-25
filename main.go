@@ -29,6 +29,11 @@ const (
 func main() {
 	// MONGO
 	MONGO := os.Getenv("MONGO")
+	PORT := os.Getenv("PORT")
+
+	if PORT == "" {
+		PORT = "3000"
+	}
 
 	if MONGO == "" {
 		panic("MONGO environment variable is not set")
@@ -87,7 +92,7 @@ func main() {
 	})
 
 	// Listen
-	app.Listen(":3000")
+	app.Listen(":" + PORT)
 }
 
 func mongo_joke(client *mongo.Client) bson.M {
